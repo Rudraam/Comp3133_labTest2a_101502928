@@ -1,59 +1,41 @@
-# SpacexMissionDashboard
+# 🚀 SpaceX Mission Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+## App Description
+SpaceX Mission Dashboard is an Angular application that provides a comprehensive view of SpaceX's launch history and upcoming missions. It connects to the official SpaceX REST API v4 (https://api.spacexdata.com/v4) to retrieve real-time launch data, displaying mission details including status, flight numbers, mission patches, and webcast links in a space-themed dark UI.
 
-## Development server
+## Features Implemented
+- Angular HttpClient integration with SpaceX REST API v4
+- Reactive search/filter using ReactiveFormsModule and Signals
+- Custom pipe: MissionStatusPipe (`missionStatus`) — transforms success/upcoming flags to emoji status strings
+- Angular Signals: `signal()`, `computed()` used in LaunchListComponent and LaunchDetailComponent
+- `@for`, `@if`, `@switch` control flow directives (all used in templates)
+- Angular Material dark-themed UI (mat-toolbar, mat-spinner, mat-button, mat-form-field, mat-icon)
+- Routing with lazy-loaded components (`/launches` and `/launches/:id`)
+- TypeScript interfaces: `Launch` and `Rocket` (strictly typed, no `any`)
+- Responsive glassmorphism card layout with hover glow effects
+- Side panel quick-view with signal-based selected launch state
+- `debounceTime(300)` + `distinctUntilChanged()` on search input
+- Error handling with retry button and loading spinner
 
-To start a local development server, run:
+## Screenshots
+[Add screenshots here with descriptions — e.g., "Launch list view", "Search filtering", "Detail panel"]
 
+## Instructions to Run
+
+### Prerequisites
+- Node.js 18+
+- Angular CLI: `npm install -g @angular/cli`
+
+### Steps
 ```bash
+git clone <your-repo-url>
+cd spacex-mission-dashboard
+npm install
 ng serve
 ```
+Open browser at `http://localhost:4200`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Build for Production
 ```bash
-ng generate component component-name
+ng build --configuration production
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

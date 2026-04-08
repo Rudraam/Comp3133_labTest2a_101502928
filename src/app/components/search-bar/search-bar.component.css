@@ -1,0 +1,45 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+::ng-deep .search-field .mat-mdc-text-field-wrapper {
+  background: rgba(17, 24, 39, 0.8);
+  border-radius: 8px;
+}
+
+::ng-deep .search-field .mdc-notched-outline__leading,
+::ng-deep .search-field .mdc-notched-outline__notch,
+::ng-deep .search-field .mdc-notched-outline__trailing {
+  border-color: rgba(0, 212, 255, 0.3) !important;
+}
+
+::ng-deep .search-field .mdc-notched-outline:hover .mdc-notched-outline__leading,
+::ng-deep .search-field .mdc-notched-outline:hover .mdc-notched-outline__notch,
+::ng-deep .search-field .mdc-notched-outline:hover .mdc-notched-outline__trailing {
+  border-color: rgba(0, 212, 255, 0.7) !important;
+}
+
+::ng-deep .search-field .mat-mdc-form-field-label,
+::ng-deep .search-field .mdc-floating-label {
+  color: #94a3b8;
+}
+
+::ng-deep .search-field input.mat-mdc-input-element {
+  color: #f1f5f9;
+}
+
+::ng-deep .search-field .mat-icon {
+  color: #00d4ff;
+}

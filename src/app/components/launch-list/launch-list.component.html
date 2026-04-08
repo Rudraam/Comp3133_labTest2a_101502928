@@ -1,0 +1,111 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Mission Control</h1>
+    <p class="page-subtitle">Explore {{ launches().length }} SpaceX launches</p>
+  </div>
+
+  <app-search-bar (searchChange)="onSearchChange($event)"></app-search-bar>
+
+  <div class="content-layout" [class.with-panel]="selectedLaunch()">
+    <div class="list-area">
+      @if (isLoading()) {
+        <div class="loading-container">
+          <mat-spinner diameter="60" color="accent"></mat-spinner>
+          <p class="loading-text">Loading missions...</p>
+        </div>
+      }
+
+      @if (error()) {
+        <div class="error-container">
+          <mat-icon class="error-icon">error_outline</mat-icon>
+          <p class="error-message">{{ error() }}</p>
+          <button mat-raised-button color="accent" (click)="fetchLaunches()">Retry</button>
+        </div>
+      }
+
+      @if (!isLoading() && !error()) {
+        <div class="results-info">
+          <span class="results-count">{{ filteredLaunches().length }} missions found</span>
+        </div>
+
+        <div class="launches-grid">
+          @for (launch of filteredLaunches(); track launch.id) {
+            <div class="launch-card" [class.selected]="selectedLaunch()?.id === launch.id" (click)="selectLaunch(launch)">
+              <div class="card-header">
+                <div class="patch-container">
+                  @if (launch.links.patch.small) {
+                    <img [src]="launch.links.patch.small" [alt]="launch.name + ' patch'" class="mission-patch" />
+                  } @else {
+                    <div class="patch-placeholder">
+                      <mat-icon>rocket_launch</mat-icon>
+                    </div>
+                  }
+                </div>
+                <div class="card-title-area">
+                  <h3 class="mission-name">{{ launch.name }}</h3>
+                  <span class="flight-number">Flight #{{ launch.flight_number }}</span>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="launch-date">
+                  <mat-icon class="info-icon">calendar_today</mat-icon>
+                  <span>{{ launch.date_utc | date:'mediumDate' }}</span>
+                </div>
+
+                <div class="status-badge" [ngClass]="getStatusClass(launch)">
+                  @switch (launch.success) {
+                    @case (true) {
+                      <span>✅ Success</span>
+                    }
+                    @case (false) {
+                      <span>❌ Failed</span>
+                    }
+                    @default {
+                      @if (launch.upcoming) {
+                        <span>🚀 Upcoming</span>
+                      } @else {
+                        <span>⏳ Unknown</span>
+                      }
+                    }
+                  }
+                </div>
+
+                @if (launch.details) {
+                  <p class="mission-details">{{ launch.details | slice:0:120 }}{{ launch.details.length > 120 ? '...' : '' }}</p>
+                }
+              </div>
+
+              <div class="card-actions">
+                <button mat-stroked-button color="accent" [routerLink]="['/launches', launch.id]" (click)="$event.stopPropagation()">
+                  <mat-icon>open_in_new</mat-icon>
+                  Full Details
+                </button>
+                <button mat-flat-button color="primary" (click)="selectLaunch(launch); $event.stopPropagation()">
+                  <mat-icon>info</mat-icon>
+                  Quick View
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (filteredLaunches().length === 0 && launches().length > 0) {
+          <div class="no-results">
+            <mat-icon class="no-results-icon">search_off</mat-icon>
+            <p>No missions match your search.</p>
+          </div>
+        }
+      }
+    </div>
+
+    @if (selectedLaunch()) {
+      <div class="detail-panel">
+        <app-launch-detail
+          [launch]="selectedLaunch()"
+          (close)="closeDetail()">
+        </app-launch-detail>
+      </div>
+    }
+  </div>
+</div>

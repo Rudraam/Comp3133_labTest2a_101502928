@@ -1,0 +1,10 @@
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search missions...</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [formControl]="searchControl" placeholder="e.g. Falcon 9, CRS..." />
+    @if (searchControl.value) {
+      <mat-icon matSuffix style="cursor:pointer" (click)="searchControl.setValue('')">close</mat-icon>
+    }
+  </mat-form-field>
+</div>

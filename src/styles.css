@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --space-bg: #0a0e1a;
+  --card-bg: #111827;
+  --accent: #00d4ff;
+  --success: #22c55e;
+  --failed: #ef4444;
+  --upcoming: #f59e0b;
+  --text-primary: #f1f5f9;
+  --text-muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--space-bg);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', 'Orbitron', monospace;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Angular Material dark overrides */
+.mat-mdc-card {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-toolbar {
+  color: var(--text-primary) !important;
+}
+
+/* Spinner accent color */
+.mat-mdc-progress-spinner circle {
+  stroke: var(--accent) !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 14, 26, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.6);
+}
+
+/* Router outlet — full height when on /launches/:id page */
+router-outlet + * {
+  display: block;
+  min-height: calc(100vh - 64px);
+}
