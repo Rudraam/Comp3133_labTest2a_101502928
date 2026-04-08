@@ -1,41 +1,68 @@
-# 🚀 SpaceX Mission Dashboard
+# Lab Test 2 - COMP 3133
 
-## App Description
-SpaceX Mission Dashboard is an Angular application that provides a comprehensive view of SpaceX's launch history and upcoming missions. It connects to the official SpaceX REST API v4 (https://api.spacexdata.com/v4) to retrieve real-time launch data, displaying mission details including status, flight numbers, mission patches, and webcast links in a space-themed dark UI.
+## SpaceX Mission Dashboard
+
+An Angular application that fetches and displays SpaceX launch data using the
+SpaceX REST API v3. Built for COMP 3133 Lab Test 2a.
 
 ## Features Implemented
-- Angular HttpClient integration with SpaceX REST API v4
-- Reactive search/filter using ReactiveFormsModule and Signals
-- Custom pipe: MissionStatusPipe (`missionStatus`) — transforms success/upcoming flags to emoji status strings
-- Angular Signals: `signal()`, `computed()` used in LaunchListComponent and LaunchDetailComponent
-- `@for`, `@if`, `@switch` control flow directives (all used in templates)
-- Angular Material dark-themed UI (mat-toolbar, mat-spinner, mat-button, mat-form-field, mat-icon)
-- Routing with lazy-loaded components (`/launches` and `/launches/:id`)
-- TypeScript interfaces: `Launch` and `Rocket` (strictly typed, no `any`)
-- Responsive glassmorphism card layout with hover glow effects
-- Side panel quick-view with signal-based selected launch state
-- `debounceTime(300)` + `distinctUntilChanged()` on search input
-- Error handling with retry button and loading spinner
+
+- ✅ Angular HttpClientModule for REST API integration
+- ✅ MissionList component with mission cards grid
+- ✅ MissionDetails component with full mission information
+- ✅ Filter by Launch Year (2006–2020)
+- ✅ Filter by Successful Launch (true/false)
+- ✅ Filter by Successful Landing (true/false)
+- ✅ Angular Material UI components (cards, toolbar, chips, buttons, spinner)
+- ✅ TypeScript interface for Mission data model
+- ✅ SpaceX API Service with multiple endpoints
+- ✅ Angular Routing between list and detail views
+- ✅ FormsModule and ReactiveFormsModule
+
+## API Reference
+
+- All launches: `https://api.spacexdata.com/v3/launches`
+- Filter by year: `https://api.spacexdata.com/v3/launches?launch_year=2020`
+- Single launch: `https://api.spacexdata.com/v3/launches/:flight_number`
 
 ## Screenshots
-[Add screenshots here with descriptions — e.g., "Launch list view", "Search filtering", "Detail panel"]
 
-## Instructions to Run
+### Mission List View
+[Screenshot of mission list with filter panel]
+
+### Mission Filter Applied
+[Screenshot showing year/success filter active]
+
+### Mission Details View
+[Screenshot of mission detail page]
+
+## How to Run
 
 ### Prerequisites
 - Node.js 18+
 - Angular CLI: `npm install -g @angular/cli`
 
 ### Steps
+
 ```bash
-git clone <your-repo-url>
+git clone <your-github-repo-url>
 cd spacex-mission-dashboard
 npm install
 ng serve
 ```
-Open browser at `http://localhost:4200`
 
-### Build for Production
+Navigate to `http://localhost:4200`
+
+### Production Build
+
 ```bash
 ng build --configuration production
 ```
+
+## Deployment
+
+Live app: [your-vercel-or-render-url]
+
+## Developer
+
+Dhima — Student

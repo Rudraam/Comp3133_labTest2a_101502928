@@ -1,0 +1,124 @@
+<mat-toolbar color="primary">
+  <span>SpaceX Mission Launch List</span>
+</mat-toolbar>
+
+<div class="page-container">
+  <!-- Filter Sidebar -->
+  <div class="filter-sidebar">
+    <div class="filter-section">
+      <h3 class="filter-title">Launch Date</h3>
+      <div class="year-grid">
+        <button
+          *ngFor="let year of years"
+          mat-raised-button
+          [class.active-filter]="selectedYear === year"
+          (click)="selectYear(year)"
+          class="year-btn">
+          {{ year }}
+        </button>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="filter-section">
+      <h3 class="filter-title">Successful Launch</h3>
+      <div class="toggle-group">
+        <button
+          mat-raised-button
+          [class.active-filter]="launchSuccess === true"
+          (click)="setLaunchSuccess(true)"
+          class="toggle-btn">
+          True
+        </button>
+        <button
+          mat-raised-button
+          [class.active-filter]="launchSuccess === false"
+          (click)="setLaunchSuccess(false)"
+          class="toggle-btn">
+          False
+        </button>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="filter-section">
+      <h3 class="filter-title">Successful Land</h3>
+      <div class="toggle-group">
+        <button
+          mat-raised-button
+          [class.active-filter]="landSuccess === true"
+          (click)="setLandSuccess(true)"
+          class="toggle-btn">
+          True
+        </button>
+        <button
+          mat-raised-button
+          [class.active-filter]="landSuccess === false"
+          (click)="setLandSuccess(false)"
+          class="toggle-btn">
+          False
+        </button>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="filter-section">
+      <button mat-raised-button color="warn" (click)="resetFilters()" class="reset-btn">
+        Reset Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Mission Grid -->
+  <div class="mission-content">
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && missions.length === 0" class="no-results">
+      No missions found for the selected filters.
+    </div>
+
+    <div *ngIf="!isLoading" class="mission-grid">
+      <mat-card
+        *ngFor="let mission of missions"
+        class="mission-card"
+        (click)="onMissionClick(mission)">
+        <div class="card-image-container">
+          <img
+            *ngIf="mission.links.mission_patch_small"
+            [src]="mission.links.mission_patch_small"
+            [alt]="mission.mission_name + ' patch'"
+            class="mission-patch" />
+          <div *ngIf="!mission.links.mission_patch_small" class="no-patch">
+            <mat-icon>rocket_launch</mat-icon>
+          </div>
+        </div>
+        <mat-card-content class="card-body">
+          <h3 class="mission-name">{{ mission.mission_name }} <span class="flight-num">#{{ mission.flight_number }}</span></h3>
+          <p class="card-detail"><strong>Mission ID:</strong> {{ mission.mission_id.length ? mission.mission_id.join(', ') : 'N/A' }}</p>
+          <p class="card-detail"><strong>Year:</strong> {{ mission.launch_year }}</p>
+          <p class="card-detail">
+            <strong>Launch:</strong>
+            <span [class.success]="mission.launch_success === true" [class.failure]="mission.launch_success === false">
+              {{ mission.launch_success === true ? 'Success' : mission.launch_success === false ? 'Failed' : 'Unknown' }}
+            </span>
+          </p>
+          <p class="card-detail">
+            <strong>Land:</strong>
+            <span [class.success]="mission.land_success === true" [class.failure]="mission.land_success === false">
+              {{ mission.land_success === true ? 'Success' : mission.land_success === false ? 'Failed' : 'Unknown' }}
+            </span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Developed By - Dhima</p>
+</footer>

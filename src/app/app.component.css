@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+mat-toolbar {
+  margin-bottom: 0;
+}
